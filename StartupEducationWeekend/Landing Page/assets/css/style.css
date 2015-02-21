@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 Template Name: SmartMVP - Responsive Premium Startup Landing Page Template
 Theme URL: http://themedept.com/demo/smartmvp/index.html
 Description: SmartMVP - Responsive Premium Startup Landing Page Template
@@ -112,7 +112,7 @@ ul {
 }
 
 .dark-bg{
-    background-color: #323a45;
+    background-color: #726E6D;
 }
 
 .white-bg{
@@ -554,8 +554,8 @@ p {
 }
 
 .navbar-fixed-top.is-scrolling{
-    background: #323a45;
-    background: rgba(50,58,69,0.95);
+    background: #726E6D;
+    background: rgba(114, 110, 109, 0.95);
     border: 0;
     padding-top: 5px;
     padding-bottom: 5px;
