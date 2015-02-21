@@ -14,7 +14,6 @@ using StartupEducationWeekend.Models;
 namespace StartupEducationWeekend.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
@@ -71,17 +70,48 @@ namespace StartupEducationWeekend.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
+        public JsonResult RegisterUnAuthenticated(string UserName, string FirstName, string LastName)
         {
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    if (UserName.EndsWith(".edu"))
+                    {
+                        WebSecurity.CreateUserAndAccount(UserName, "");
+                        string[] adminArr = new string[1];
+                        adminArr[0] = "UnAuthenticated";
+                        Roles.AddUserToRoles(UserName, adminArr);
+                        WebSecurity.Login(UserName, "");
+                        return Json(1);
+                    }
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    return Json(0);
+                }
+            }
+            return Json(0);
+
+            // If we got this far, something failed, redisplay form
+            return Json(0);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public JsonResult Register(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Attempt to register the user
+                try
+                {
+                    WebSecurity.ChangePassword(model.UserName, "", model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return Json(1);
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -90,12 +120,12 @@ namespace StartupEducationWeekend.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return Json(0);
         }
 
         //
         // POST: /Account/Disassociate
-
+        [Authorize(Roles = "Administrator, User")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Disassociate(string provider, string providerUserId)
@@ -124,7 +154,7 @@ namespace StartupEducationWeekend.Controllers
 
         //
         // GET: /Account/Manage
-
+        [Authorize(Roles = "Administrator, User")]
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -139,7 +169,7 @@ namespace StartupEducationWeekend.Controllers
 
         //
         // POST: /Account/Manage
-
+        [Authorize(Roles = "Administrator, User")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
@@ -202,7 +232,7 @@ namespace StartupEducationWeekend.Controllers
 
         //
         // POST: /Account/ExternalLogin
-
+        [Authorize(Roles = "Administrator, User")]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -213,7 +243,7 @@ namespace StartupEducationWeekend.Controllers
 
         //
         // GET: /Account/ExternalLoginCallback
-
+        [Authorize(Roles = "Administrator, User")]
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
@@ -246,7 +276,7 @@ namespace StartupEducationWeekend.Controllers
 
         //
         // POST: /Account/ExternalLoginConfirmation
-
+        [Authorize(Roles = "Administrator, User")]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -292,13 +322,13 @@ namespace StartupEducationWeekend.Controllers
 
         //
         // GET: /Account/ExternalLoginFailure
-
+        [Authorize(Roles = "Administrator, User")]
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
             return View();
         }
-
+        [Authorize(Roles = "Administrator, User")]
         [AllowAnonymous]
         [ChildActionOnly]
         public ActionResult ExternalLoginsList(string returnUrl)
@@ -306,7 +336,7 @@ namespace StartupEducationWeekend.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return PartialView("_ExternalLoginsListPartial", OAuthWebSecurity.RegisteredClientData);
         }
-
+        [Authorize(Roles = "Administrator, User")]
         [ChildActionOnly]
         public ActionResult RemoveExternalLogins()
         {
@@ -326,6 +356,28 @@ namespace StartupEducationWeekend.Controllers
 
             ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
+        }
+        [Authorize(Roles = "Administrator, User")]
+        public JsonResult AssociateClassesToUser(int UserId, List<int> ClassIds)
+        {
+            try
+            {
+                using (var db = new StartUpEducationWeekendContext())
+                {
+                    var User = db.UserProfiles.FirstOrDefault(f => f.UserId == UserId);
+                    foreach (var Class in db.Classes.Where(w => ClassIds.Contains(w.ClassId)))
+                    {
+                        User.Classes.Add(Class);
+                    }
+                    db.Entry(User).State = System.Data.EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(1);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(0);
+            }
         }
 
         #region Helpers

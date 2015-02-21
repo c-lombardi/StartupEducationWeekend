@@ -11,7 +11,7 @@ namespace StartupEducationWeekend.Models
     public class Colleges
     {
         [Key]
-        public int CollegeId { get; set; }
+        public string CollegeId { get; set; }
         public string CollegeName { get; set; }
     }
 }

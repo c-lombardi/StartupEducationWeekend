@@ -17,6 +17,21 @@ namespace StartupEducationWeekend.Models
 
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Colleges> Colleges { get; set; }
+        public DbSet<Classes> Classes { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserProfile>().
+              HasMany(c => c.Classes).
+              WithMany(p => p.Users).
+              Map(
+               m =>
+               {
+                   m.MapLeftKey("ClassId");
+                   m.MapRightKey("UserId");
+                   m.ToTable("UserClasses");
+               });
+        }
     }
 
     [Table("UserProfile")]
@@ -25,10 +40,24 @@ namespace StartupEducationWeekend.Models
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
+        [EmailAddress]
         public string UserName { get; set; }
-        public int CollegeId { get; set; }
+        
+        public string FirstName { get; set; }
+        
+        public string LastName { get; set; }
+        
+        public string CollegeId { get; set; }
         [ForeignKey("CollegeId")]
         public virtual Colleges College { get; set; }
+
+        public ICollection<Classes> Classes { get; set; }
+
+        public UserProfile()
+        {
+            Classes = new HashSet<Classes>();
+        }
+
     }
 
     public class RegisterExternalLoginModel
@@ -81,7 +110,7 @@ namespace StartupEducationWeekend.Models
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 0)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

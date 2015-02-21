@@ -1,0 +1,21 @@
+﻿@model List<StartupEducationWeekend.Models.Classes>
+
+<div>
+    <select id="ClassList" multiple="multiple" size="10">
+        @foreach(var Class in Model)
+        {
+            <option value="@Class.ClassId">
+                @Class.ClassCode | @Class.ClassSection | @Class.ClassTitle
+            </option>
+        }
+    </select>
+    <button onclick="setClasses();">Add Classes</button>
+</div>
+<script>
+    function setClasses() {
+        var selectedClasses = new Array();
+        $("#ClassList :selected").each(function () {
+            selectedClasses(this.val());
+        });
+    }
+</script>

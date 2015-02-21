@@ -170,6 +170,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Classes.cs" />
     <Compile Include="Models\Colleges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -289,9 +290,11 @@
     <Content Include="Views\Colleges\Create.cshtml" />
     <Content Include="Views\Colleges\Edit.cshtml" />
     <Content Include="Views\Colleges\Delete.cshtml" />
+    <Content Include="Views\Shared\ClassSelect.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

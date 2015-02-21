@@ -6,9 +6,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using StartupEducationWeekend.Models;
+using WebMatrix.WebData;
 
 namespace StartupEducationWeekend.Controllers
 {
+    [Authorize(Roles = "Administrator, User")]
     public class CollegesController : Controller
     {
         private StartUpEducationWeekendContext db = new StartUpEducationWeekendContext();
@@ -116,5 +118,6 @@ namespace StartupEducationWeekend.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
     }
 }
