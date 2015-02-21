@@ -27,8 +27,8 @@ function showRegisterForm(){
         $('.login-footer').fadeOut('fast',function(){
             $('.register-footer').fadeIn('fast');
         });
-        $('.modal-title').html('Create an Account');
-        $('.modal-subtitle').html('Begin a 30-day free trial of SmartMVP');
+        $('.modal-title').html('Welcome to StudyClique');
+        $('.modal-subtitle').html('Enter your name and email');
     });
     $('.error').removeClass('alert alert-danger').html('');
 }
