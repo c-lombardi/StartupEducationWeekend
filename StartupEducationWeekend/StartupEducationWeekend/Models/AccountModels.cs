@@ -16,6 +16,7 @@ namespace StartupEducationWeekend.Models
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Colleges> Colleges { get; set; }
     }
 
     [Table("UserProfile")]
@@ -25,6 +26,9 @@ namespace StartupEducationWeekend.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public string UserName { get; set; }
+        public int CollegeId { get; set; }
+        [ForeignKey("CollegeId")]
+        public virtual Colleges College { get; set; }
     }
 
     public class RegisterExternalLoginModel
