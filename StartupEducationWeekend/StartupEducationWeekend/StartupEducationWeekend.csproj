@@ -173,6 +173,7 @@
     <Compile Include="Models\Classes.cs" />
     <Compile Include="Models\Colleges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Account\WallController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -291,6 +292,7 @@
     <Content Include="Views\Colleges\Edit.cshtml" />
     <Content Include="Views\Colleges\Delete.cshtml" />
     <Content Include="Views\Shared\ClassSelect.cshtml" />
+    <Content Include="Views\Account\AddClasses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

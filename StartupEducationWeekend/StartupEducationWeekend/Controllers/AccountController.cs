@@ -356,14 +356,23 @@ namespace StartupEducationWeekend.Controllers
             ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
+
+        public ActionResult AddClasses()
+        {
+            using (var db = new StartUpEducationWeekendContext())
+            {
+                return View(db.Classes.ToList());
+            }
+        }
+
         [Authorize(Roles = "Administrator, User")]
-        public JsonResult AssociateClassesToUser(int UserId, List<int> ClassIds)
+        public JsonResult AssociateClassesToUser(List<int> ClassIds)
         {
             try
             {
                 using (var db = new StartUpEducationWeekendContext())
                 {
-                    var User = db.UserProfiles.FirstOrDefault(f => f.UserId == UserId);
+                    var User = db.UserProfiles.FirstOrDefault(f => f.UserId == WebSecurity.CurrentUserId);
                     foreach (var Class in db.Classes.Where(w => ClassIds.Contains(w.ClassId)))
                     {
                         User.Classes.Add(Class);
