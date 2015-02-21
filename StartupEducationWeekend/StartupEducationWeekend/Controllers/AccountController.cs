@@ -94,14 +94,10 @@ namespace StartupEducationWeekend.Controllers
                 }
             }
             return Json(0);
-
-            // If we got this far, something failed, redisplay form
-            return Json(0);
         }
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public JsonResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
@@ -109,9 +105,12 @@ namespace StartupEducationWeekend.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.ChangePassword(model.UserName, "", model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
-                    return Json(1);
+                    if (model.ConfirmPassword.Equals(model.Password))
+                    {
+                        WebSecurity.ChangePassword(model.UserName, "", model.Password);
+                        WebSecurity.Login(model.UserName, model.Password);
+                        return Json(1);
+                    }
                 }
                 catch (MembershipCreateUserException e)
                 {

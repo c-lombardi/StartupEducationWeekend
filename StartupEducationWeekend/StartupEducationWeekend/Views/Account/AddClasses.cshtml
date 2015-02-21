@@ -1,0 +1,18 @@
+﻿@model List<StartupEducationWeekend.Models.Classes>
+@{
+    ViewBag.Title = "AddClasses";
+}
+
+<h2>AddClasses</h2>
+@Html.Partial("ClassSelect", Model)
+
+<script>
+    $("select")
+  .change(function () {
+      var str = "";
+      $("select option:selected").each(function () {
+          str += $(this).text() + " ";
+      });
+      $("div").text(str);
+  })
+</script>
