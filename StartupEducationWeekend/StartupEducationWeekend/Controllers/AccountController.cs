@@ -263,7 +263,7 @@ namespace StartupEducationWeekend.Controllers
             if (ModelState.IsValid)
             {
                 // Insert a new user into the database
-                using (UsersContext db = new UsersContext())
+                using (StartUpEducationWeekendContext db = new StartUpEducationWeekendContext())
                 {
                     UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists

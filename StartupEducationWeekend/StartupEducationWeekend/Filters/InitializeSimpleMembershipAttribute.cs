@@ -25,11 +25,11 @@ namespace StartupEducationWeekend.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<StartUpEducationWeekendContext>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new StartUpEducationWeekendContext())
                     {
                         if (!context.Database.Exists())
                         {

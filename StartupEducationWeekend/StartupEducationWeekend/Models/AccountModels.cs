@@ -8,9 +8,9 @@ using System.Web.Security;
 
 namespace StartupEducationWeekend.Models
 {
-    public class UsersContext : DbContext
+    public class StartUpEducationWeekendContext : DbContext
     {
-        public UsersContext()
+        public StartUpEducationWeekendContext()
             : base("DefaultConnection")
         {
         }

@@ -5,14 +5,14 @@ namespace StartupEducationWeekend.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<StartupEducationWeekend.Models.UsersContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<StartupEducationWeekend.Models.StartUpEducationWeekendContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(StartupEducationWeekend.Models.UsersContext context)
+        protected override void Seed(StartupEducationWeekend.Models.StartUpEducationWeekendContext context)
         {
             //  This method will be called after migrating to the latest version.
 
