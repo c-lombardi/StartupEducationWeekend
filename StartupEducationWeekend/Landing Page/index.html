@@ -97,9 +97,9 @@
                                         <!-- Menu Items -->
                                         <li><a href="#about" title="" class="scrollto">About</a></li>
                                         <li><a href="#features" title="" class="scrollto">Features</a></li>
-                                        <li><a href="#pricing" title="" class="scrollto">Pricing</a></li>
+                                        <!-- <li><a href="#pricing" title="" class="scrollto">Pricing</a></li>
                                         <li><a href="#testimonials" title="" class="scrollto">Testimonials</a></li>
-                                        <li><a href="#team" title="" class="scrollto">Team</a></li>
+                                        <li><a href="#team" title="" class="scrollto">Team</a></li> -->
                                         <li><a href="#mobile-download" title="" class="scrollto">Mobile</a></li>
                                         <!-- Login and Signup Modal on click -->
                                         <li><a class="btn btn-nav" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login</a></li>
@@ -127,7 +127,7 @@
                                 </button>
                                 <!-- Modal-Header Title-->
                                 <h4 class="modal-title">Sign in to <span>studyclique</span></h4>
-                                <p class="modal-subtitle">Enter your email and password</p>
+                                <p class="modal-subtitle">Enter your name and email</p>
                             </div><!-- /End Modal-Header -->
 
                             <!-- Modal-Body Content -->
@@ -157,9 +157,10 @@
                                             <p class="sm-success"><i class="icon icon_check_alt2"></i> <strong>Congratulation! Signup modal validation is working. Implement your code.</strong></p>
                                             <p class="sm-failed"><i class="icon icon_close_alt2"></i><strong> Something went wrong! Insert correct value.</strong></p>
                                             <!-- Input Fields -->
+											<input id="sm-name" class="form-control input-lg" type="text" placeholder="Name" name="sm-name" required>
                                             <input id="sm-email" class="form-control input-lg" type="text" placeholder="Email" name="sm-email" required>
-                                            <input id="sm-password" class="form-control input-lg" type="password" placeholder="Password" name="sm-password">
-                                            <input id="sm-confirm" class="form-control input-lg" type="password" placeholder="Repeat Password" name="sm-confirm">
+                                            <!-- <input id="sm-password" class="form-control input-lg" type="password" placeholder="Password" name="sm-password">
+                                            <input id="sm-confirm" class="form-control input-lg" type="password" placeholder="Repeat Password" name="sm-confirm"> -->											
                                             <!-- Signup Button -->
                                             <button class="btn btn-color">Create Account</button>
                                         </form>
@@ -209,12 +210,13 @@
                                             <p class="fast-failed"><i class="icon icon_close_alt2"></i><strong> Something went wrong! Insert correct value.</strong></p>  
 
                                             <!-- Input fields -->
+											<div class="form-group">
+                                                <input type="text" size="25" name="name" id="user-name" class="form-control input-lg" placeholder="Enter your name" required>
+                                            </div>
                                             <div class="form-group">
                                                 <input type="email" name="fast-email" id="fast-email" class="form-control input-lg" placeholder="Enter your .edu email address" required>
                                             </div>
-                                            <div class="form-group">
-                                                <input type="password" size="25" name="fast-password" id="fast-password" class="form-control input-lg" placeholder="Enter your Password" required>
-                                            </div>
+                                            
                                             <!-- Signup Button -->
                                             <button class="btn btn-color">Get Access</button>
                                         </form>

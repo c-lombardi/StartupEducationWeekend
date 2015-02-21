@@ -1233,7 +1233,7 @@ p {
 }
 
 .fast-reg .form-control{
-    background: #ffffff;
+    background: #ffffff !important;
     border-color: #ffffff;
     font-weight: 400;
     font-size: 14px;
