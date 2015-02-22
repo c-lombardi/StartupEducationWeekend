@@ -554,8 +554,8 @@ p {
 }
 
 .navbar-fixed-top.is-scrolling{
-    background: #726E6D;
-    background: rgba(114, 110, 109, 0.95);
+    background: #23282D;
+    background: rgba(35, 40, 45, 0.95);
     border: 0;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -563,7 +563,7 @@ p {
 
 .navbar-right{
     position: relative;
-    top: 5px;
+    top: 14px;
     float: left;
     text-align: left;
 }
@@ -1233,7 +1233,7 @@ p {
 }
 
 .fast-reg .form-control{
-    background: #ffffff !important;
+    background: #ffffff;
     border-color: #ffffff;
     font-weight: 400;
     font-size: 14px;
@@ -1662,7 +1662,7 @@ p {
 }
 
 .footer-nav{
-    margin-top: 100px;
+    margin-top: 40px;
     font-family: 'Raleway','Open Sans',Helvetica,Arial,sans-serif;
     font-style: normal;
     font-weight: 700;
@@ -1687,10 +1687,11 @@ p {
 }
 
 .footer-copy{
-    margin-top:15px;
+    margin-top:25px;
     font-size:13px;
     line-height: 16px;
     text-align: center;
+padding-bottom:25px;
 }
 
 /* Twitter Feed by Tweetie */
