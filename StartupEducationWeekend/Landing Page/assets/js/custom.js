@@ -42,7 +42,7 @@ function showLoginForm(){
             $('.login-footer').fadeIn('fast');
         });
         
-        $('.modal-title').html('Sign in to <span>SmartMvp</span>');
+        $('.modal-title').html('Sign in to <span>StudyClique</span>');
         $('.modal-subtitle').html('Enter your email and password');
     });
     $('.error').removeClass('alert alert-danger').html('');
